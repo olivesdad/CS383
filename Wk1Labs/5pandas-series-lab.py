@@ -63,6 +63,6 @@ rt_distance.divide(mpg, fill_value=0)
 # If you still have time, play more with some Pandas series
 # to get comfortable with indexing.  Also, play with other
 # series features discussed in lecture.
-
+mpg.plot()
 # Also, check out this "10 Minutes to pandas" tutorial:
 # https://pandas.pydata.org/pandas-docs/stable/user_guide/10min.html

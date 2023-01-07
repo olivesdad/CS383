@@ -54,10 +54,10 @@ df.loc[df.mpg > 20]
 df.values
 # add a new column, 'gas', which shows the number of
 # gallons of gas needed for a round-trip drive to CSUMB
-gas=df.distance / df.mpg
-df.join(gas)
-# print the first two rows of the data frame using .iloc
+df = df.join(pd.DataFrame(df.distance / df.mpg, columns=['gas']))
 
+# print the first two rows of the data frame using .iloc
+df.iloc[0:2,:]
 # If you still have time, redo the problem above that asks you
 # to use pandas.join, but this time use pandas.merge.  You
 # will want to rerun your earlier code so that df has no

@@ -4,6 +4,7 @@ Homework 1
 """
 
 import numpy as np
+import math
 
 # In this homework you will write Python and NumPy code, leading up
 # to writing code that determines the part number of a machine part
@@ -232,7 +233,7 @@ width - np.average(width)
 # and the last values should be 5.6, 5.5, 5.4.
 # assume arrays length and width are defined
 # (assignment to parts)
-np.hstack((width, length))
+parts=np.hstack((width, length))
 
 #@ 21
 # reshape the parts array so that it is a 2D NumPy array, with
@@ -243,7 +244,7 @@ np.hstack((width, length))
 # Example: parts[2,1] = 5.2
 # assume array parts is defined
 # (assignment to parts)
-
+parts=parts.reshape((9,2), order='F')
 
 #@ 22
 # write an expression to get the all rows of parts after
@@ -251,7 +252,7 @@ np.hstack((width, length))
 # Example: the first row of your output should be [3., 5.2]
 # assume array parts is defined
 # (write an expression)
-
+parts[2:]
 
 # Next we are going to think about how we could measure the
 # similarity between parts.  One way to do it is to think
@@ -273,7 +274,7 @@ np.hstack((width, length))
 # work correctly if array 'parts' contains different values.
 # assume array 'parts' is defined
 # (write an expression)
-
+math.sqrt((parts[0,0] - parts[1,0])**2 + (parts[0,1] - parts[1,1])**2)
 
 #@ 24
 # Suppose we find a part and measure it. We find the width is 3.15 and
@@ -288,7 +289,7 @@ np.hstack((width, length))
 # 
 # (define function distance)
 def distance(width, length, parts):
-    # your code here
+    return np.sqrt((parts[:,0] - width)**2 + (parts[:,1] - length) ** 2)
 
         
 #@ 25
@@ -306,4 +307,6 @@ def distance(width, length, parts):
 #
 # (define function most_similar_part)
 def most_similar_part(width, length, parts):
-    # your code here
+    a1=distance(width, length, parts)
+    m1=a1.min()
+    return np.unique(part_num[np.abs(a1-m1) <= 0.1])

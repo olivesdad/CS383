@@ -60,7 +60,7 @@ x ** 2
 # Example: if s1 is 'foo', and s2 is 'bar', the result should be 7
 # assume s1 and s2 are defined
 # (write an expression)
-len(s1 + s2)
+len(msg)
 
 #@ 6 compute the substring consisting of the 2nd-4th characters of string s
 # Example: if s is 'snorkel', the result should be 'nor'.
@@ -310,3 +310,15 @@ def most_similar_part(width, length, parts):
     a1=distance(width, length, parts)
     m1=a1.min()
     return np.unique(part_num[np.abs(a1-m1) <= 0.1])
+
+ 
+ 
+# ************************* 
+# FEEDBACK 
+# ************************* 
+ 
+ 
+""" 
+problem 1.17: execution error: operands could not be broadcast together with shapes (6,) (3,) 
+problem 1.5: execution error: object of type 'int' has no len()
+""" 

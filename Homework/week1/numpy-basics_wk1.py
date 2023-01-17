@@ -201,7 +201,7 @@ np.average(mask)
 # your result should be 3.1, 3.2, 3.2
 # assume 'width' and 'length' are defined
 # (write an expression)
-width[length > 5]
+width[length < 5.0]
 
 #@ 18
 # compute the mean-zeroed version of width by subtracting

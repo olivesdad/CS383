@@ -405,7 +405,8 @@ df['Major_share'] = (df['Total'] / df['Total'].sum()).tolist()
 # Agriculture & Natural Resources        0.051505
 # Arts                                   0.089105
 # Biology & Life Science                 0.070219
-
+(pd.DataFrame((df['Unemployment_rate'] * df['Major_share'])).join(df['Major_category'])).groupby('Major_category')[0].sum()\
+    /(df.groupby('Major_category')['Major_share'].sum())
 
 #@ 30
 # Compute the share of women by major category.  to do this

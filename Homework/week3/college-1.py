@@ -418,7 +418,7 @@ df['Major_share'] = (df['Total'] / df['Total'].sum()).tolist()
 # Arts                                   0.623694
 # Biology & Life Science                 0.592566
 # Business                               0.487205
-
+df.groupby('Major_category')['Women'].sum()/df.groupby('Major_category')['Total'].sum()
 
 #@ 31
 # Compute the weighted-median median salary for majors with
@@ -432,7 +432,7 @@ df['Major_share'] = (df['Total'] / df['Total'].sum()).tolist()
 # False    43633.592490
 # True     34692.752128
 # dtype: float64
-
+(pd.DataFrame((df['Median'] * df['Major_share'])).join(df['HighShareWomen'])).groupby('HighShareWomen')[0].sum()/ (df.groupby('HighShareWomen')['Major_share'].sum())
 
 #@ 32
 # Compute the fraction of low wage jobs by major category for all the people.
@@ -442,7 +442,7 @@ df['Major_share'] = (df['Total'] / df['Total'].sum()).tolist()
 # Engineering                            0.046651
 # Computers & Mathematics                0.053965
 # Health                                 0.067504
-
+(df.groupby('Major_category')['Low_wage_jobs'].sum() / df.groupby('Major_category')['Total'].sum()).sort_values()
 
 #@ 33
 # Compute the unemployment rate by major category.
@@ -455,7 +455,7 @@ df['Major_share'] = (df['Total'] / df['Total'].sum()).tolist()
 # Arts                                   0.089233
 # Humanities & Liberal Arts              0.085852
 # Law & Public Policy                    0.085258
-
+((df.groupby('Major_category')['Unemployed'].sum()) / (df.groupby('Major_category')['Unemployed'].sum() + df.groupby('Major_category')['Employed'].sum())).sort_values(ascending=False)
 
 
 

@@ -395,8 +395,7 @@ df['Major_share'] = (df['Total'] / df['Total'].sum()).tolist()
 # Arts                                   31716.044578
 # Biology & Life Science                 34446.722572
 # Business                               40942.111188
-(pd.DataFrame((df['Median'] * df['Major_share'])).join(df['Major_category'])).groupby('Major_category')[0].sum()\
-    / (df.groupby('Major_category')['Major_share'].sum())
+(pd.DataFrame((df['Median'] * df['Major_share'])).join(df['Major_category'])).groupby('Major_category')[0].sum()/(df.groupby('Major_category')['Major_share'].sum())
 #@ 29
 # Using the same idea as the last problem to compute
 # the the weighted median unemployment rate for each major category.
@@ -405,8 +404,7 @@ df['Major_share'] = (df['Total'] / df['Total'].sum()).tolist()
 # Agriculture & Natural Resources        0.051505
 # Arts                                   0.089105
 # Biology & Life Science                 0.070219
-(pd.DataFrame((df['Unemployment_rate'] * df['Major_share'])).join(df['Major_category'])).groupby('Major_category')[0].sum()\
-    /(df.groupby('Major_category')['Major_share'].sum())
+(pd.DataFrame((df['Unemployment_rate'] * df['Major_share'])).join(df['Major_category'])).groupby('Major_category')[0].sum()/(df.groupby('Major_category')['Major_share'].sum())
 
 #@ 30
 # Compute the share of women by major category.  to do this

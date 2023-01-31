@@ -151,21 +151,31 @@ pd.crosstab(df['measles'], df['tests_positive']).plot.bar()
 # parameter 2 = probability of measles given positive test
 # parameter 3 = probability of no measles given a positive test
 # parameter 4 = the total number of people in the simulation, default to 10000
-def sim_p_measles_if_pos(p1, p2, p3, p4=1000):
+
+def sim_p_measles_if_pos(p1, p2, p3, p4=10000):
     #has measles array
-    has_m = np.random.choice([True, False], size=p4, p=[p1, 1-p1])
-    
+  #  has_m = np.random.choice([True, False], size=p4, p=[p1, 1-p1])
+    has_measles=np.random.choice([True, False], size=p4, p=[p1, 1-p1])
+    num_measles=has_measles.sum()
     #p_test array
-    p_test = np.full(p4, False)
+   # p_test = np.full(p4, False)
+    tests_positive=np.full(p4, False)
     
     #Set measles and positive test 
-    p_test[has_m == True] = np.random.choice([True, False],  size=p_test[has_m==True].size, p=[p2, 1-p2])
+   # p_test[has_m == True] = np.random.choice([True, False],  size=p_test[has_m==True].size, p=[p2, 1-p2])
+    tests_positive[has_measles == True] = np.random.choice([True,False], size = num_measles, p=[p2, 1-p2])
+
 
     #Set False positives
-    p_test[has_m == False] = np.random.choice([True, False], size=p_test[has_m==False].size, p=[p3, 1-p3])
-    
+   # p_test[has_m == False] = np.random.choice([True, False], size=p_test[has_m==False].size, p=[p3, 1-p3])
+    tests_positive[has_measles == False] = np.random.choice([True, False], size = (p4 - num_measles), p=[ p3, 1-p3 ])
+
     #result
-    return (has_m[has_m & p_test]).sum()/p_test.sum()
+    #answer = (has_measles[has_measles & tests_positive].sum()) /tests_positive.sum()
+    a = ((has_measles == True) & (tests_positive == True)).sum()
+    b = tests_positive.sum()
+    answer = a/b
+    return answer
 
 # test the function on the question at the top of the assignment
 print('Problem 10: test 1: {:.4f}'.format(sim_p_measles_if_pos(0.01, 0.98, 0.02)))
@@ -184,7 +194,7 @@ print('Problem 10, test 2: {:.4f}'.format(sim_p_measles_if_pos(0.01, 0.95, 0.90)
 # Use p_measles, p_pos_if_measles, and p_pos_if_okay to compute your answer.
 # (expression)
 # Variables to be used: p_measles, p_pos_if_measles, p_pos_if_okay 
-
+p_pos_if_measles * p_measles / (p_pos_if_measles * p_measles + p_pos_if_okay * (1 - p_measles))
 
 #@ 12
 # Take your code that uses Bayes' Law and create a function that will 
@@ -194,7 +204,8 @@ print('Problem 10, test 2: {:.4f}'.format(sim_p_measles_if_pos(0.01, 0.95, 0.90)
 # parameter 1 = probability of measles
 # parameter 2 = probability of measles given positive test
 # parameter 3 = probability of no measles given a positive test
-
+def p_measles_if_pos(p_measles, p_pos_if_measles, p_pos_if_okay):
+    return p_pos_if_measles * p_measles / (p_pos_if_measles * p_measles + p_pos_if_okay * (1 - p_measles))
 
 # test the function on the question at the top of the assignment
 print('Problem 12, test 1: {:.4f}'.format(p_measles_if_pos(0.01, 0.98, 0.02)))
